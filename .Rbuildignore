@@ -1,2 +1,4 @@
 ^trf3\.Rproj$
 ^\.Rproj\.user$
+^\.github$
+^README\.Rmd$
