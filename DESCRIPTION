@@ -1,6 +1,6 @@
 Package: trf3
 Title: Baixa e Organiza Dados do trf3
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person(given = "Jose",
            family = "de Jesus Filho",
