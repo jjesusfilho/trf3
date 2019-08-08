@@ -14,3 +14,7 @@ Language: pt_BR
 LazyData: true
 usethis.full_name: Jose de Jesus Filho
 usethis.protocol: ssh
+Suggests: 
+    roxygen2
+Imports: 
+    rlang (>= 0.1.2)
