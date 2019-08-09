@@ -11,9 +11,28 @@ status](https://travis-ci.org/jjesusfilho/trf3.svg?branch=master)](https://travi
 status](https://ci.appveyor.com/api/projects/status/github/jjesusfilho/trf3?branch=master&svg=true)](https://ci.appveyor.com/project/jjesusfilho/trf3)
 <!-- badges: end -->
 
-The goal of trf3 is to …
+O objetivo deste pacote é de prover funções para baixar e organizar
+decisões de primeira e de segunda instância do Tribunal Regional Federal
+da Terceira Região
 
-## Installation
+## Instalação
+
+Instale a versão em desenvolvimento:
+
+``` r
+devtools::install_.packages_github("jjesusfilho/trf3")
+```
+
+## Utilização
+
+Para baixar acórdãos do TRF3, use a seguinte
+função:
+
+``` r
+baixar_cjsg_trf3(livre = "agência nacional de vigilância sanitária", data_inicial = "01/07/2019", data_final = "31/07/2019")
+
+df <- ler_cjsg_trf3()
+```
 
 ## Code of conduct
 
