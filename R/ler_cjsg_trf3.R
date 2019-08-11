@@ -1,4 +1,4 @@
-#' Ler htmls baixados por baixar_cjsg_trf3
+#' Lê htmls baixados por baixar_cjsg_trf3
 #'
 #' @param diretorio Default para o atual
 #'
@@ -14,15 +14,18 @@ ler_cjsg_trf3 <- function(diretorio = ".") {
 
  df<- purrr::map_dfr(arquivos, ~ {
 
-    variaveis <- xml2::read_html(.x) %>%
+
+    doc <- xml2::read_html(.x)
+
+    variaveis <- doc %>%
       xml2::xml_find_all("//div[@id='blocoesquerdo'][span]") %>%
       purrr::map(~xml2::xml_children(.x) %>% xml_attr("class"))
 
-    valores <- xml2::read_html(.x) %>%
+    valores <- doc %>%
       xml2::xml_find_all("//div[@id='blocoesquerdo'][span]") %>%
       purrr::map(~xml2::xml_children(.x) %>% xml2::xml_text(trim = TRUE))
 
-    df<-purrr::map2_dfr(variaveis,valores,~{
+    df <- purrr::map2_dfr(variaveis,valores,~{
       t(.y) %>%
       tibble::as_tibble() %>%
       purrr::set_names(.x)

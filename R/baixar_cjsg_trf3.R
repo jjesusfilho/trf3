@@ -1,6 +1,7 @@
 #' Baixa decisões de segunda instância do TRF3
 #'
 #' @param livre busca livre
+#' @param aspas TRUE para colocar a busca entre aspas
 #' @param data_inicial formato "dd/mm/aaaa"
 #' @param data_final formato "dd/mm/aaaa"
 #' @param diretorio Default para atual.
@@ -15,8 +16,13 @@
 #'   data_final = "31/07/2019"
 #' )
 #' }
-baixar_cjsg_trf3 <- function(livre="",data_inicial="",data_final="", diretorio="."){
+baixar_cjsg_trf3 <- function(livre = "", aspas = FALSE, data_inicial = "", data_final = "", diretorio = "."){
 
+  if (aspas ==  TRUE){
+
+    livre <- deparse(livre)
+
+  }
 
 k <- httr::RETRY("GET","http://web.trf3.jus.br/base-textual",httr::timeout(5))
 

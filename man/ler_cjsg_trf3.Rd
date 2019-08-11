@@ -2,7 +2,7 @@
 % Please edit documentation in R/ler_cjsg_trf3.R
 \name{ler_cjsg_trf3}
 \alias{ler_cjsg_trf3}
-\title{Ler htmls baixados por baixar_cjsg_trf3}
+\title{Lê htmls baixados por baixar_cjsg_trf3}
 \usage{
 ler_cjsg_trf3(diretorio = ".")
 }
@@ -13,7 +13,7 @@ ler_cjsg_trf3(diretorio = ".")
 tibble com informações processuais
 }
 \description{
-Ler htmls baixados por baixar_cjsg_trf3
+Lê htmls baixados por baixar_cjsg_trf3
 }
 \examples{
 \dontrun{

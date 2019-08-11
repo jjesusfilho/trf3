@@ -4,11 +4,13 @@
 \alias{baixar_cjsg_trf3}
 \title{Baixa decisões de segunda instância do TRF3}
 \usage{
-baixar_cjsg_trf3(livre = "", data_inicial = "", data_final = "",
-  diretorio = ".")
+baixar_cjsg_trf3(livre = "", aspas = FALSE, data_inicial = "",
+  data_final = "", diretorio = ".")
 }
 \arguments{
 \item{livre}{busca livre}
+
+\item{aspas}{TRUE para colocar a busca entre aspas}
 
 \item{data_inicial}{formato "dd/mm/aaaa"}
 
