@@ -19,7 +19,7 @@ ler_cjsg_trf3 <- function(diretorio = ".") {
 
     variaveis <- doc %>%
       xml2::xml_find_all("//div[@id='blocoesquerdo'][span]") %>%
-      purrr::map(~xml2::xml_children(.x) %>% xml_attr("class"))
+      purrr::map(~xml2::xml_children(.x) %>% xml2::xml_attr("class"))
 
     valores <- doc %>%
       xml2::xml_find_all("//div[@id='blocoesquerdo'][span]") %>%
