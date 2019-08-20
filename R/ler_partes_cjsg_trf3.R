@@ -19,7 +19,10 @@ ler_partes_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
   arquivos <-  arquivos %||% list.files(path = diretorio, pattern = ".html",
                                         full.names = TRUE)
 
-  purrr::map_dfr(arquivos,~{
+  purrr::map2_dfr(arquivos,ordem, purrr::possibly(~{
+
+
+    ordem <- stringr::str_extract(arquivos,"\\d{7,}")
 
     x <- xml2::read_html(.x)
 
@@ -47,6 +50,7 @@ ler_partes_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
 
 
 
-    cbind(classe_processo, nomes)
-  })
+    cbind(ordem = .y, classe_processo, nomes) %>%
+      dplyr::mutate_all(list(~iconv(.,"UTF-8","latin1//TRANSLIT")))
+  },NULL))
 }

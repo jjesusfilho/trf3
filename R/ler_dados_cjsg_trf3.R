@@ -17,8 +17,9 @@ ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
 
   arquivos <-  arquivos %||% list.files(path = diretorio, pattern = ".html",
                                         full.names = TRUE)
+  ordem <- stringr::str_extract(arquivos,"\\d{7}")
 
-  purrr::map_dfr(arquivos,~{
+  purrr::map2_dfr(arquivos,ordem, purrr::possibly(~{
 
     x <- xml2::read_html(.x)
 
@@ -32,6 +33,6 @@ ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
     inteiro_teor <-  xml2::xml_text(x,trim = TRUE) %>%
       setNames("inteiro_teor")
 
-    dplyr::bind_cols(classe_processo = classe_processo,inteiro_teor = inteiro_teor)
-  })
+    dplyr::bind_cols(ordem =.y, classe_processo = classe_processo,inteiro_teor = inteiro_teor)
+  }, NULL))
 }
