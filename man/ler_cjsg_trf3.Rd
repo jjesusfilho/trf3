@@ -4,10 +4,12 @@
 \alias{ler_cjsg_trf3}
 \title{Lê htmls baixados por baixar_cjsg_trf3}
 \usage{
-ler_cjsg_trf3(diretorio = ".")
+ler_cjsg_trf3(diretorio = ".", arquivos = NULL)
 }
 \arguments{
 \item{diretorio}{Default para o atual}
+
+\item{arquivos}{Se forem informados, diretorio é ignorado.}
 }
 \value{
 tibble com informações processuais

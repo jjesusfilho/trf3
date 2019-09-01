@@ -13,12 +13,12 @@
 #' }
 ler_partes_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
 
-  `%||%` <- rlang::`%||%`
 
+  if (is.null(arquivos)){
 
-  arquivos <-  arquivos %||% list.files(path = diretorio, pattern = ".html",
+  arquivos <-  list.files(path = diretorio, pattern = ".html",
                                         full.names = TRUE)
-
+}
   purrr::map2_dfr(arquivos,ordem, purrr::possibly(~{
 
 

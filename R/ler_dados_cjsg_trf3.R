@@ -13,10 +13,11 @@
 #' }
 ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
 
-  `%||%` <- rlang::`%||%`
+  if (is.null(arquivos)){
 
-  arquivos <-  arquivos %||% list.files(path = diretorio, pattern = ".html",
-                                        full.names = TRUE)
+    arquivos <-  list.files(path = diretorio, pattern = ".html",
+                            full.names = TRUE)
+  }
   ordem <- stringr::str_extract(arquivos,"\\d{7}")
 
   purrr::map2_dfr(arquivos,ordem, purrr::possibly(~{

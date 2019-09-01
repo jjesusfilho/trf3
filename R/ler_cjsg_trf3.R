@@ -1,6 +1,7 @@
 #' Lê htmls baixados por baixar_cjsg_trf3
 #'
 #' @param diretorio Default para o atual
+#' @param arquivos Se forem informados, diretorio é ignorado.
 #'
 #' @return tibble com informações processuais
 #' @export
@@ -9,9 +10,11 @@
 #' \dontrun{
 #' ler_cjsg_trf3(diretorio = ".")
 #' }
-ler_cjsg_trf3 <- function(diretorio = ".") {
-  arquivos <- list.files(path = diretorio, pattern = ".html", full.names = TRUE)
+ler_cjsg_trf3 <- function(diretorio = ".", arquivos = NULL) {
 
+ if (is.null(arquivos)){
+  arquivos <- list.files(path = diretorio, pattern = ".html", full.names = TRUE)
+ }
  df<- purrr::map_dfr(arquivos, ~ {
 
 

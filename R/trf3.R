@@ -10,5 +10,5 @@ NULL
 ## quiets concerns of R CMD check re: the .'s that appear in pipelines
 if (getRversion() >= "2.15.1") {
   utils::globalVariables(c(".","linkdocumento","tipodocumento", "relator",
-    "fonte","decisao","ementa", "classe",  "data_publicacao","data_decisao"))
+    "fonte","decisao","ementa", "classe",  "data_publicacao","data_decisao","ordem"))
 }
