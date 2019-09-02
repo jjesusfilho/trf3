@@ -55,10 +55,10 @@ ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".", plano = "seq
 
   partes <- partes %>%
     janitor::clean_names() %>%
-    tidyr::separate(no_orig, c("numero_origem", "vara_origem"), sep = "\\d?Vr") %>%
-    tidyr::separate(vara_origem, c("vara_origem", "uf_origem"), sep = "/") %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("origem")), stringr::str_squish) %>%
-    dplyr::mutate(origem = NULL) %>%
+   # tidyr::separate(no_orig, c("numero_origem", "vara_origem"), sep = "\\d?Vr") %>%
+  #  tidyr::separate(vara_origem, c("vara_origem", "uf_origem"), sep = "/") %>%
+   # dplyr::mutate_at(dplyr::vars(dplyr::ends_with("origem")), stringr::str_squish) %>%
+  #  dplyr::mutate(origem = NULL) %>%
     dplyr::mutate(
       cargo_relator = stringr::str_extract(
         relator,
