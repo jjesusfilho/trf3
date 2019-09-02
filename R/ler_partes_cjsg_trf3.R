@@ -33,7 +33,7 @@ ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".", plano = "seq
                                                                                                                  "processo")) %>% tidyr::separate(processo, c("processo",
                                                                                                                                                               "origem"), sep = "/")
     nomes <-   x  %>%
-      xml_find_all("//table[@mywidth='13,72']") %>%
+      xml2::xml_find_all("//table[@mywidth='13,72']") %>%
       rvest::html_table() %>%
       magrittr::extract2(2) %>%
       dplyr::select(-2) %>%
