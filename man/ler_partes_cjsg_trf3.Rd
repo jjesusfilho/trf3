@@ -4,13 +4,16 @@
 \alias{ler_partes_cjsg_trf3}
 \title{Lê partes do processo de segunda instância do trf3}
 \usage{
-ler_partes_cjsg_trf3(arquivos = NULL, diretorio = ".")
+ler_partes_cjsg_trf3(arquivos = NULL, diretorio = ".",
+  plano = "sequential")
 }
 \arguments{
 \item{arquivos}{Vetor de caminhos para os artigos}
 
 \item{diretorio}{Se arquivos não forem fornecidos, fornecer
 diretório}
+
+\item{plano}{plano de paralelização, consulte `future::plan`}
 }
 \value{
 data.frame
