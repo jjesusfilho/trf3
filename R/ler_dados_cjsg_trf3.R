@@ -11,6 +11,7 @@
 #' \dontrun{
 #' ler_dados_cjsg_trf3(diretorio ".")
 #' }
+
 ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
 
   if (is.null(arquivos)){
@@ -20,7 +21,7 @@ ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
   }
   ordem <- stringr::str_extract(arquivos,"\\d{7}")
 
-  purrr::map2_dfr(arquivos,ordem, purrr::possibly(~{
+  df<- purrr::map2_dfr(arquivos,ordem, purrr::possibly(~{
 
     x <- xml2::read_html(.x)
 
@@ -29,11 +30,18 @@ ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
       stringr::str_split("\\s(?=\\d{7})",simplify=TRUE) %>%
       tibble::as_tibble() %>%
       setNames(c("classe","processo")) %>%
-      tidyr::separate(processo,c("processo","origem"),sep = "/")
+      tidyr::separate(processo,c("processo","origem"),sep = "/") %>%
+      dplyr::mutate(classe = iconv(classe,"UTF-8","latin1//TRANSLITT"))
 
     inteiro_teor <-  xml2::xml_text(x,trim = TRUE) %>%
-      setNames("inteiro_teor")
+      setNames("inteiro_teor") %>%
+      stringr::str_replace_all("(?<!\\:)(\r\n)+(?!\\:)","<br><br>") %>%
+      iconv("UTF-8","latin1//TRANSLIT")
 
     dplyr::bind_cols(ordem =.y, classe_processo = classe_processo,inteiro_teor = inteiro_teor)
   }, NULL))
+
+  df$inteiro_teor <- purrr::map(df$inteiro_teor,~htmltools::HTML(.x) %>%
+                                  unlist())
+  df
 }
