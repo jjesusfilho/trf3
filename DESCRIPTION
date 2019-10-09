@@ -32,7 +32,11 @@ Imports:
     rvest,
     htmltools,
     furrr,
-    future
+    future,
+    DBI,
+    glue,
+    dbx,
+    RPostgres
 RoxygenNote: 6.1.1
 URL: https://github.com/jjesusfilho/trf3
 BugReports: https://github.com/jjesusfilho/trf3/issues
