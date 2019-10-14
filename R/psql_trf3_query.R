@@ -8,6 +8,7 @@
 #' @param start data inicial no formato "yyyy-mm-dd"
 #' @param end data final no formato "yyyy-mm-dd"
 #' @param query palavras a serem buscadas
+#' @param partes nome da base partes
 #'
 #' @return tibble
 #' @export
@@ -17,13 +18,15 @@
 #' dplyr::copy_to(con, "julgados", df)
 #' df <- psql_trf3_query(con, "julgados", "IRPF")
 #' }
-psql_trf3_query <- function(con, tbl, query = "",classes = NULL, processos = NULL, origem = c("SP","MS"),start = "2009-01-01", end = NULL) {
+
+
+psql_trf3_query <- function(con, tbl, query = "",classes = NULL, processos = NULL, origem = c("SP","MS"),start = "2009-01-01", end = NULL,partes="partes") {
 
   target <- "document_tokens"
 
   origem <- origem %>%
     `[`(1)
-
+  ordem <-'ordem'
   if (is.null(end)) end <- Sys.Date()
 
   start <- as.Date(start)
@@ -78,4 +81,20 @@ psql_trf3_query <- function(con, tbl, query = "",classes = NULL, processos = NUL
 
 
   df <- DBI::dbGetQuery(con, q)
+
+
+
+  qpartes <- glue::glue_sql("
+                     select ordem, parte_nome,parte
+                     from {`partes`}
+                     WHERE {`partes`}.ordem IN ({df$ordem*})
+                             ",.con = con)
+  dfp <- DBI::dbGetQuery(con, qpartes)
+
+  df <- df %>%
+    dplyr::left_join(dfp, by="ordem") %>%
+    dplyr::distinct() %>%
+    dplyr::select(c("ordem","classe", "processo","parte","parte_nome", "origem", "relator",
+                    "vara", "data_julgamento","julgado"))
+
 }

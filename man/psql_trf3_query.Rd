@@ -6,7 +6,7 @@
 \usage{
 psql_trf3_query(con, tbl, query = "", classes = NULL,
   processos = NULL, origem = c("SP", "MS"), start = "2009-01-01",
-  end = NULL)
+  end = NULL, partes = "partes")
 }
 \arguments{
 \item{con}{connection}
@@ -24,6 +24,8 @@ psql_trf3_query(con, tbl, query = "", classes = NULL,
 \item{start}{data inicial no formato "yyyy-mm-dd"}
 
 \item{end}{data final no formato "yyyy-mm-dd"}
+
+\item{partes}{nome da base partes}
 }
 \value{
 tibble
