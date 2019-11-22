@@ -1,7 +1,8 @@
-#' Baixar processos de primeiro grau
+#' Baixar processos de primeiro grau do TRF3
 #'
 #' @param processos Vetor com os números dos dos processos
 #' @param diretorio Diretório para onde vão os htmls
+#' @param movimentacao Baixar movimentacao completa? Default: TRUE
 #'
 #' @return htmls
 #' @export
@@ -12,7 +13,7 @@
 #' baixar_cpopg_trf3(processos = "0014367-81.2016.4.03.6100",diretorio="cpopg")
 #'
 #' }
-baixar_cpopg_trf3 <- function(processos = NULL, diretorio = "."){
+baixar_cpopg_trf3 <- function(processos = NULL, movimentacao = TRUE, diretorio = "."){
 
   processos <- stringr::str_remove_all(processos,"\\D") %>%
     abjutils::build_id()
@@ -41,20 +42,27 @@ purrr::walk(processos,purrr::possibly(purrrogress::with_progress(~{
 
   url2 <- "http://csp.jfsp.jus.br/csp/consulta/%25CSP.Broker.cls"
   url3<-"http://csp.jfsp.jus.br/csp/consulta/consinternetpro1a.csp"
-
+  url4 <-"http://csp.jfsp.jus.br/csp/consulta/consinternetpro1d.csp"
   httr::POST(url2,body=body,encode="form")
 
 
 
   arquivo <- paste0("_cpopg_", stringr::str_remove_all(.x,"\\D"), ".html")
+  arquivo2 <- paste0("_cpopg__movimentacao_", stringr::str_remove_all(.x,"\\D"), ".html")
 
- a<- httr::RETRY("GET", url3, httr::timeout(30),
+  httr::RETRY("GET", url3, httr::timeout(30),
               httr::write_disk(file.path(diretorio, Sys.time() %>%
                                            stringr::str_replace_all("\\D+", "_") %>%
                                            stringr::str_replace("$", arquivo))))
 
 
+if (movimentacao == TRUE){
 
+  httr::RETRY("GET", url4, httr::timeout(30),
+              httr::write_disk(file.path(diretorio, Sys.time() %>%
+                                           stringr::str_replace_all("\\D+", "_") %>%
+                                           stringr::str_replace("$", arquivo2))))
+}
 
 }),NULL))
 
