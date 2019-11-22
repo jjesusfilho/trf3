@@ -4,9 +4,17 @@
 \alias{psql_trf3_query}
 \title{PostgreSQL full-text search}
 \usage{
-psql_trf3_query(con, tbl, query = "", classes = NULL,
-  processos = NULL, origem = c("SP", "MS"), start = "2009-01-01",
-  end = NULL, partes = "partes")
+psql_trf3_query(
+  con,
+  tbl,
+  query = "",
+  classes = NULL,
+  processos = NULL,
+  origem = c("SP", "MS"),
+  start = "2009-01-01",
+  end = NULL,
+  partes = "partes"
+)
 }
 \arguments{
 \item{con}{connection}

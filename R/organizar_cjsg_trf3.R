@@ -1,4 +1,4 @@
-#' Organizar dados do TRF3
+#' Organiza cjsg do TRF3
 #'
 #' @param df dados
 #' @param julgado coluna onde se encontram os julgados
@@ -11,9 +11,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' df <- organizar_trf3(df, julgado)
+#' df <- organizar_cjsg_trf3(df, julgado)
 #' }
-organizar_trf3 <- function(df,julgado){
+organizar__cjsg_trf3 <- function(df,julgado){
 
   j <- rlang::enquo(julgado)
 

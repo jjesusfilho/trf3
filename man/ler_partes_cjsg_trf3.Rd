@@ -4,8 +4,7 @@
 \alias{ler_partes_cjsg_trf3}
 \title{Lê partes do processo de segunda instância do trf3}
 \usage{
-ler_partes_cjsg_trf3(arquivos = NULL, diretorio = ".",
-  plano = "sequential")
+ler_partes_cjsg_trf3(arquivos = NULL, diretorio = ".", plano = "sequential")
 }
 \arguments{
 \item{arquivos}{Vetor de caminhos para os artigos}

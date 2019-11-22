@@ -1,4 +1,4 @@
-#' Lê conteúdo inteiro teor do trf3
+#' Lê conteúdo do inteiro teor do trf3
 #'
 #' @param arquivos Vetor de caminhos para os artigos
 #' @param diretorio Se arquivos não forem fornecidos, fornecer
@@ -47,7 +47,7 @@ ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){
       lubridate::parse_date_time("dmyHMS",tz="America/Sao_Paulo")
 
     relator <- inteiro_teor %>%
-      stringr::str_extract("(?<=\\(a\\):\\s).+?(?=Nº)")
+      stringr::str_extract("(?<=\\(a\\):\\s).+?(?=N\u00ba)")
 
     vara <- inteiro_teor %>%
       stringr::str_extract("(?<=\\bVr\\b).+?(?=/)") %>%

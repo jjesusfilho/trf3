@@ -4,8 +4,7 @@
 \alias{psql_trf3_sample}
 \title{Gets a table's sample}
 \usage{
-psql_trf3_sample(con, tbl = NULL, column = NULL, value = NULL,
-  n = 10)
+psql_trf3_sample(con, tbl = NULL, column = NULL, value = NULL, n = 10)
 }
 \arguments{
 \item{con}{connection}

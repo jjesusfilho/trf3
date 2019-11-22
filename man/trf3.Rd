@@ -3,7 +3,6 @@
 \docType{package}
 \name{trf3}
 \alias{trf3}
-\alias{trf3-package}
 \title{\code{trf3} package}
 \description{
 Baixa  e organiza decisões do TRF3

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ler_dados_cjsg_trf3.R
 \name{ler_dados_cjsg_trf3}
 \alias{ler_dados_cjsg_trf3}
-\title{Lê conteúdo inteiro teor do trf3}
+\title{Lê conteúdo do inteiro teor do trf3}
 \usage{
 ler_dados_cjsg_trf3(arquivos = NULL, diretorio = ".")
 }
@@ -16,7 +16,7 @@ diretório}
 data.frame
 }
 \description{
-Lê conteúdo inteiro teor do trf3
+Lê conteúdo do inteiro teor do trf3
 }
 \examples{
 \dontrun{

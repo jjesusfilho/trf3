@@ -14,7 +14,7 @@ FROM
 {`tbl`} a
 USING {`tbl`} b
 WHERE
-a.{`id`} < b.{`id`}
+a.{`pkey`} < b.{`pkey`}
 AND a.{`coluna`} = b.{`coluna`}", .con = con)
 
 DBI::dbExecute(con,query)
