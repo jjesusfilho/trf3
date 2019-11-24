@@ -23,13 +23,13 @@ purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
 
   variaveis <- x %>%
              xml2::xml_find_all("//td[@width='122']/p/b") %>%
-             xml_text() %>%
+             xml2::xml_text() %>%
              iconv("UTF-8","LATIN1") %>%
              tail(-2)
 
   valores <- x %>%
     xml2::xml_find_all("//table[1][@width='533']//td[@width='401']/p") %>%
-    xml_text() %>%
+    xml2::xml_text() %>%
     iconv("UTF-8","LATIN1") %>%
     tail(-2)
 
