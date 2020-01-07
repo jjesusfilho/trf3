@@ -34,10 +34,12 @@ psql_write_trf3 <- function(con = NULL, tbl = NULL, data = NULL) {
     stop("You must provide the data to be inserted")
   }
 
-  DBI::dbCreateTable(con, tbl, data)
 
+  DBI::dbCreateTable(con, tbl, data)
   psql_add_pkey(con, tbl)
+  DBI::dbBegin(con)
   psql_trf3_insert(con, tbl, data = data)
   psql_trf3_tokenize(con, tbl)
   psql_trf3_trigger(con, tbl)
+  DBI::dbCommit(con)
 }
