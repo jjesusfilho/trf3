@@ -3,16 +3,15 @@
 #' @param arquivos Vetor de caminhos para os artigos
 #' @param diretorio Se arquivos não forem fornecidos, fornecer
 #'     diretório
-#' @param plano plano de paralelização, consulte `future::plan`
 #'
 #' @return data.frame
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' ler_partes_cjsg_trf3(diretorio ".")
+#' ler_partes_cjsg_trf3(diretorio = ".")
 #' }
-ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".", plano = "sequential")
+ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".")
 {
 
   if (is.null(arquivos)) {
@@ -20,9 +19,8 @@ ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".", plano = "seq
                            full.names = TRUE)
   }
 
-  future::plan(plano)
 
-  partes <- furrr::future_map_dfr(arquivos, purrr::possibly(~{
+  partes <- purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~{
     ordem <- stringr::str_extract(.x, "\\d{7,}")
 
     x <- xml2::read_html(.x)
@@ -51,7 +49,7 @@ ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".", plano = "seq
     cbind(ordem = ordem, classe_processo, nomes) %>%
       dplyr::mutate_all(list(~iconv(.,
                                     "UTF-8", "latin1//TRANSLIT")))
-  }, NULL))
+  }), NULL))
 
   partes <- partes %>%
     janitor::clean_names() %>%

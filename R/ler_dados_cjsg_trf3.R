@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' ler_dados_cjsg_trf3(diretorio ".")
+#' ler_dados_cjsg_trf3(diretorio = ".")
 #' }
 
 ler_dados_cjsg_trf3<- function(arquivos = NULL,diretorio = "."){

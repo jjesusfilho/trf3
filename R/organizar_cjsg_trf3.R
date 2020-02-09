@@ -31,7 +31,7 @@ organizar__cjsg_trf3 <- function(df,julgado){
     lubridate::parse_date_time("dmyHMS",tz="America/Sao_Paulo")
 
   relator <- final %>%
-    stringr::str_extract("(?<=\\(a\\):\\s).+?(?=Nº)")
+    stringr::str_extract("(?<=\\(a\\):\\s).+?(?=N\u00ba)")
 
   vara <- j %>%
     stringr::str_extract("(?<=\\bVr\\b).+?(?=/)") %>%

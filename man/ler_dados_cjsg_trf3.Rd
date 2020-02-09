@@ -20,6 +20,6 @@ Lê conteúdo do inteiro teor do trf3
 }
 \examples{
 \dontrun{
-ler_dados_cjsg_trf3(diretorio ".")
+ler_dados_cjsg_trf3(diretorio = ".")
 }
 }
