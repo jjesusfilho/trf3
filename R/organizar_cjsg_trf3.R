@@ -13,7 +13,7 @@
 #' \dontrun{
 #' df <- organizar_cjsg_trf3(df, julgado)
 #' }
-organizar__cjsg_trf3 <- function(df,julgado){
+organizar_cjsg_trf3 <- function(df,julgado){
 
   j <- rlang::enquo(julgado)
 

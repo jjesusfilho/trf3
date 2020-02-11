@@ -21,6 +21,7 @@ organizar_cpopg_trf3 <- function(df){
 
   dados <- df %>%
     dplyr::select(tidyselect::all_of(nomes_dados)) %>%
+    dplyr::filter(!is.na(assunto)) %>%
     dplyr::distinct(proc,.keep_all=TRUE) %>%
     dplyr::mutate(valor_causa=numero(valor_causa)) %>%
     dplyr::mutate(data_protocolo=lubridate::dmy(data_protocolo)) %>%
