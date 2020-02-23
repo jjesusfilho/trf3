@@ -10,7 +10,7 @@ ler_cpopg_trf3<-function(arquivos = NULL, diretorio = "."){
 
 if (is.null(arquivos)){
 
-  arquivos <- list.files(diretorio,"html",full.names=TRUE)
+  arquivos <- list.files(diretorio,"cpopg_\\d",full.names=TRUE)
 
 
 }
@@ -19,7 +19,7 @@ purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
 
   processo <- stringr::str_extract(.x,"\\d{20}")
 
-  x <- xml2::read_html(.x,encoding="lation1")
+  x <- xml2::read_html(.x,encoding="latin1")
 
   variaveis <- x %>%
              xml2::xml_find_all("//td[@width='122']/p/b") %>%
@@ -31,7 +31,8 @@ purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
     xml2::xml_find_all("//table[1][@width='533']//td[@width='401']/p") %>%
     xml2::xml_text() %>%
     iconv("UTF-8","LATIN1") %>%
-    tail(-2)
+    tail(-2) %>%
+    tail(length(variaveis))
 
 
 
