@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lê conteúdo do inteiro teor do trf3 — ler_dados_cjsg_trf3 • trf3</title>
+<title>Organiza cjsg do TRF3 — organizar_cjsg_trf3 • trf3</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Lê conteúdo do inteiro teor do trf3 — ler_dados_cjsg_trf3" />
-<meta property="og:description" content="Lê conteúdo do inteiro teor do trf3" />
+<meta property="og:title" content="Organiza cjsg do TRF3 — organizar_cjsg_trf3" />
+<meta property="og:description" content="Organiza cjsg do TRF3" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -105,38 +105,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lê conteúdo do inteiro teor do trf3</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/trf3/blob/master/R/ler_dados_cjsg_trf3.R'><code>R/ler_dados_cjsg_trf3.R</code></a></small>
-    <div class="hidden name"><code>ler_dados_cjsg_trf3.Rd</code></div>
+    <h1>Organiza cjsg do TRF3</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jjesusfilho/trf3/blob/master/R/organizar_cjsg_trf3.R'><code>R/organizar_cjsg_trf3.R</code></a></small>
+    <div class="hidden name"><code>organizar_cjsg_trf3.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Lê conteúdo do inteiro teor do trf3</p>
+    <p>Organiza cjsg do TRF3</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ler_dados_cjsg_trf3</span>(<span class='kw'>arquivos</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)</pre>
+    <pre class="usage"><span class='fu'>organizar_cjsg_trf3</span>(<span class='no'>df</span>, <span class='no'>julgado</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>arquivos</th>
-      <td><p>Vetor de caminhos para os arquivos</p></td>
+      <th>df</th>
+      <td><p>dados</p></td>
     </tr>
     <tr>
-      <th>diretorio</th>
-      <td><p>Se arquivos não forem fornecidos, fornecer
-diretório</p></td>
+      <th>julgado</th>
+      <td><p>coluna onde se encontram os julgados</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame</p>
+    <p>mesma tibble acrescida data de julgamento, vara e relator</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Esta função é temporária, seus termos já foram incluídos
+    na função ler_dados_cjsg_trf3</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>ler_dados_cjsg_trf3</span>(<span class='kw'>diretorio</span> <span class='kw'>=</span> <span class='st'>"."</span>)
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'>organizar_cjsg_trf3</span>(<span class='no'>df</span>, <span class='no'>julgado</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -144,6 +147,7 @@ diretório</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

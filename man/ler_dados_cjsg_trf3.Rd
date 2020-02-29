@@ -7,7 +7,7 @@
 ler_dados_cjsg_trf3(arquivos = NULL, diretorio = ".")
 }
 \arguments{
-\item{arquivos}{Vetor de caminhos para os artigos}
+\item{arquivos}{Vetor de caminhos para os arquivos}
 
 \item{diretorio}{Se arquivos não forem fornecidos, fornecer
 diretório}

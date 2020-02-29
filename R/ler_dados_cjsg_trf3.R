@@ -1,6 +1,6 @@
 #' Lê conteúdo do inteiro teor do trf3
 #'
-#' @param arquivos Vetor de caminhos para os artigos
+#' @param arquivos Vetor de caminhos para os arquivos
 #' @param diretorio Se arquivos não forem fornecidos, fornecer
 #'     diretório
 #'

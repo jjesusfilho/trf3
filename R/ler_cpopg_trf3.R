@@ -32,7 +32,7 @@ purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
     xml2::xml_text() %>%
     iconv("UTF-8","LATIN1") %>%
     tail(-2) %>%
-    tail(length(variaveis))
+    head(length(variaveis))
 
 
 
