@@ -15,7 +15,11 @@ baixar_cposg_trf3 <- function(processos= NULL, diretorio = "."){
   url1<-"http://web.trf3.jus.br/base-textual/Home/ResultadoTotais"
 
 
-  purrr::walk(processos,purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar$new(total = length(processos))
+
+  purrr::walk(processos,purrr::possibly(~{
+
+    pb$tick()
 
     p <-  .x %>%
               stringr::str_remove_all("\\D")
@@ -80,6 +84,6 @@ baixar_cposg_trf3 <- function(processos= NULL, diretorio = "."){
 
 
   })
-  }),NULL))
+  },NULL))
 }
 

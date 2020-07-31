@@ -29,9 +29,11 @@ evento<- httr::GET(url) %>%
   stringr::str_extract("(?<=\\').+?(?=\\')")
 
 
+pb <- progress::progress_bar$new(total = length(processos))
 
+purrr::walk(processos,purrr::possibly(~{
 
-purrr::walk(processos,purrr::possibly(purrrogress::with_progress(~{
+  pb$tick()
 
   body <- list(`WARGC`= 2,
                `WEVENT`= evento,
@@ -48,7 +50,7 @@ purrr::walk(processos,purrr::possibly(purrrogress::with_progress(~{
 
 
   arquivo <- paste0("_cpopg_", stringr::str_remove_all(.x,"\\D"), ".html")
-  arquivo2 <- paste0("_cpopg__movimentacao_", stringr::str_remove_all(.x,"\\D"), ".html")
+  arquivo2 <- paste0("_cpopg_movimentacao_", stringr::str_remove_all(.x,"\\D"), ".html")
 
   httr::RETRY("GET", url3, httr::timeout(30),
               httr::write_disk(file.path(diretorio, Sys.time() %>%
@@ -64,7 +66,7 @@ if (movimentacao == TRUE){
                                            stringr::str_replace("$", arquivo2))))
 }
 
-}),NULL))
+},NULL))
 
 
 }

@@ -44,5 +44,5 @@ organizar_cpopg_trf3 <- function(df){
   lista <- list(dados_cpopg_trf3 = dados,partes_cpopg_trf3=partes)
 
   list2env(x = lista, envir = .GlobalEnv, parent = .GlobalEnv)
-
+ return(invisible(NULL))
 }

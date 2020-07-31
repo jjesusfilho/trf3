@@ -7,7 +7,12 @@
 #' @export
 #'
 baixar_trf3_ordem <- function(ordem, diretorio){
-purrr::walk(ordem,purrr::possibly(purrrogress::with_progress(~{
+
+  pb <- progress::progress_bar$new(total = length(ordem))
+
+purrr::walk(ordem,purrr::possibly(~{
+
+     pb$tick()
 
     arquivo<-file.path(diretorio,Sys.time() %>%
                          stringr::str_replace_all("\\D+","_") %>%
@@ -17,5 +22,5 @@ purrr::walk(ordem,purrr::possibly(purrrogress::with_progress(~{
 
     httr::GET(url,httr::write_disk(arquivo,overwrite = TRUE))
 
-  }),NULL))
+  },NULL))
 }

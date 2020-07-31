@@ -20,7 +20,12 @@ ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".")
   }
 
 
-  partes <- purrr::map_dfr(arquivos, purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar$new(total = length(arquivos))
+
+  partes <- purrr::map_dfr(arquivos, purrr::possibly(~{
+
+    pb$tick()
+
     ordem <- stringr::str_extract(.x, "\\d{7,}")
 
     x <- xml2::read_html(.x)
@@ -49,7 +54,7 @@ ler_partes_cjsg_trf3 <- function (arquivos = NULL, diretorio = ".")
     cbind(ordem = ordem, classe_processo, nomes) %>%
       dplyr::mutate_all(list(~iconv(.,
                                     "UTF-8", "latin1//TRANSLIT")))
-  }), NULL))
+  }, NULL))
 
   partes <- partes %>%
     janitor::clean_names() %>%

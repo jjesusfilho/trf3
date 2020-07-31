@@ -17,7 +17,12 @@ ler_movimentacao_trf3 <- function(arquivos = NULL, diretorio = "."){
     arquivos <- list.files(diretorio,"movimentacao",full.names=TRUE)
   }
 
- purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
+
+   pb <- progress::progress_bar$new(total = length(arquivos))
+
+ purrr::map_dfr(arquivos,purrr::possibly(~{
+
+    pb$tick()
 
    processo <- stringr::str_extract(.x,"\\d{20}")
 
@@ -44,7 +49,7 @@ ler_movimentacao_trf3 <- function(arquivos = NULL, diretorio = "."){
   tibble::tibble(processo=processo,sequencia,data,movimentacao) %>%
     tidyr::separate(movimentacao,c("principal","complemento"),sep="(?<=[:upper:])\\s*(?=\\w[:lower:])",remove=FALSE,extra="merge")
 
- }),NULL))
+ },NULL))
 
 
 }

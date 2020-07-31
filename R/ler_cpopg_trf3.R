@@ -15,7 +15,11 @@ if (is.null(arquivos)){
 
 }
 
-purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
+  pb <- progress::progress_bar$new(total = length(arquivos))
+
+purrr::map_dfr(arquivos,purrr::possibly(~{
+
+  pb$tick()
 
   processo <- stringr::str_extract(.x,"\\d{20}")
 
@@ -44,6 +48,6 @@ purrr::map_dfr(arquivos,purrr::possibly(purrrogress::with_progress(~{
     dplyr::select(-row_id) %>%
     janitor::clean_names()
 
-}),NULL))
+},NULL))
 
 }
