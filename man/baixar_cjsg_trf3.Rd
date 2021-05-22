@@ -9,6 +9,9 @@ baixar_cjsg_trf3(
   aspas = FALSE,
   data_inicial = "",
   data_final = "",
+  relator = "0",
+  classe = "0",
+  orgao_julgador = "0",
   diretorio = "."
 )
 }
@@ -20,6 +23,12 @@ baixar_cjsg_trf3(
 \item{data_inicial}{formato "dd/mm/aaaa"}
 
 \item{data_final}{formato "dd/mm/aaaa"}
+
+\item{relator}{Obtenha a lista completa com a função trf3_magistrados}
+
+\item{classe}{Obtenha a lista completa com a função trf3_classes}
+
+\item{orgao_julgador}{Obtenha a lista completa com a função trf3_orgao_julgador}
 
 \item{diretorio}{Default para atual.}
 }

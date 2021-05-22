@@ -1,7 +1,7 @@
-#' Lê htmls baixados por baixar_cjsg_trf3
+#' Lê htmls baixados por trf3_baixar_cjsg
 #'
-#' @param diretorio Default para o atual
 #' @param arquivos Se forem informados, diretorio é ignorado.
+#' @param diretorio Default para o atual
 #'
 #' @return tibble com informações processuais
 #' @export
@@ -10,15 +10,23 @@
 #' \dontrun{
 #' ler_cjsg_trf3(diretorio = ".")
 #' }
-ler_cjsg_trf3 <- function(diretorio = ".", arquivos = NULL) {
+trf3_ler_cjsg <- function(arquivos = NULL, diretorio = ".") {
 
   if (is.null(arquivos)){
     arquivos <- list.files(path = diretorio, pattern = ".html", full.names = TRUE)
   }
-  df<- purrr::map_dfr(arquivos, ~ {
 
 
-    doc <- xml2::read_html(.x)
+
+    pb <- progress::progress_bar$new(total = length(arquivos))
+
+    df <- purrr::map_dfr(arquivos, ~ {
+
+      pb$tick()
+
+      suppressMessages({
+
+    doc <- xml2::read_html(.x, encoding = "UTF-8")
 
     variaveis <- doc %>%
       xml2::xml_find_all("//div[@id='blocoesquerdo'][span]") %>%
@@ -40,11 +48,12 @@ ler_cjsg_trf3 <- function(diretorio = ".", arquivos = NULL) {
       xml2::xml_text(trim = T)
 
     df
-  })  %>%
-    dplyr::select(classe = linkdocumento, orgao_julgador = tipodocumento,
+  })
+
+    df <- df %>%   dplyr::select(classe = linkdocumento, orgao_julgador = tipodocumento,
                   relator, fonte,data_decisao = decisao, ementa) %>%
     tidyr::separate(classe,c("codigo_classe","classe"),sep = "-") %>%
-    dplyr::mutate_at(dplyr::vars(2,3),~iconv(.,"utf8","latin1//TRANSLIT")) %>%
+    #dplyr::mutate_at(dplyr::vars(2,3),~iconv(.,"utf8","latin1//TRANSLIT")) %>%
     tidyr::separate(fonte,c("fonte","data_publicacao"),sep="DATA:\\s?") %>%
     dplyr::mutate(data_publicacao = lubridate::dmy(data_publicacao),
                   data_decisao = stringr::str_extract(data_decisao,"\\d.+") %>%
@@ -56,4 +65,5 @@ ler_cjsg_trf3 <- function(diretorio = ".", arquivos = NULL) {
     dplyr::select(c("codigo_classe", "classe", "orgao_julgador","cargo_relator" ,"relator", "fonte",
                     "data_publicacao", "data_decisao", "ementa"))
 
-}
+})
+    }

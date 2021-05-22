@@ -32,14 +32,11 @@ Imports:
     rvest,
     htmltools,
     furrr,
-    future,
-    DBI,
-    glue,
-    dbx,
-    RPostgres,
     abjutils,
     stats,
     progress
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 URL: https://github.com/jjesusfilho/trf3
 BugReports: https://github.com/jjesusfilho/trf3/issues
+Depends: 
+    R (>= 2.10)

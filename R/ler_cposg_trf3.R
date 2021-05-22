@@ -29,33 +29,34 @@ ler_cposg_trf3<-
 
          sigla_classe <- stringr::str_extract(classe_processo,
                                               "\\w+")
-         classe <- stringr::str_extract(classe_processo, "(?<=\\-\\s?).+?(?=\\-)") %>%
+         classe <- stringr::str_extract(classe_processo, "(?<=\\-\\s?).+?(?=[:punct:])") %>%
             stringr::str_trim()
 
-         numero <- stringr::str_extract(classe_processo, "\\d+")
+
+         numero <- stringr::str_extract(classe_processo, "\\d{7}.*")
 
          origem <- stringr::str_extract(classe_processo, "(?<=/\\s?)\\w+")
 
          processo <- stringr::str_extract(classe_processo, "\\s\\S+$") %>%
             stringr::str_remove_all("\\D")
 
-         relator <- x %>% xml2::xml_find_first("//div[contains(.,'Relator(a)')]/following-sibling::div") %>%
+         relator <- x %>% xml2::xml_find_first("//div[@class='docTitulo'][contains(.,'Relator(a)')]/following-sibling::div") %>%
             xml2::xml_text(trim = T)
 
-         orgao_julgador <- x %>% xml2::xml_find_first("//div[contains(.,'Órgão Julgador')]/following-sibling::div") %>%
+         orgao_julgador <- x %>% xml2::xml_find_first("//div[contains(.,'\u00d3rg\u00e3o Julgador')]/following-sibling::div") %>%
             xml2::xml_text(trim = T)
 
          data_julgamento <- x %>% xml2::xml_find_first("//div[contains(.,'Data do Julgamento')]/following-sibling::div") %>%
-            xml2::xml_text(trim = T) %>% lubridate::dmy()
+            xml2::xml_text(trim = T) %>% lubridate::dmy(tz = "America/Sao_Paulo")
 
-         data_publicacao <- x %>% xml2::xml_find_first("//div[contains(.,'Data da Publicação/Fonte')]/following-sibling::div") %>%
+         data_publicacao <- x %>% xml2::xml_find_first("//div[contains(.,'Data da Publica\u00e7\u00e3o/Fonte')]/following-sibling::div") %>%
             xml2::xml_text(trim = T) %>% stringr::str_extract("(?<=\\:).+") %>%
-            lubridate::dmy()
+            lubridate::dmy(tz = "America/Sao_Paulo")
 
          ementa <- x %>% xml2::xml_find_first("//div[contains(.,'Ementa')]/following-sibling::div") %>%
             xml2::xml_text(trim = T)
 
-         dispositivo <- x %>% xml2::xml_find_first("//div[@class='docTitulo'][contains(.,'Acórdao')]/following-sibling::div") %>%
+         dispositivo <- x %>% xml2::xml_find_first("//div[@class='docTitulo'][contains(.,'Ac\u00f3rdao')]/following-sibling::div") %>%
             xml2::xml_text(trim = T)
 
          resumo_estruturado <- x %>% xml2::xml_find_first("//div[@class='docTitulo'][contains(.,'Resumo Estruturado')]/following-sibling::div") %>%
